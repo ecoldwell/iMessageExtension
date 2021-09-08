@@ -9,6 +9,8 @@ import {
   NativeModules,
   NativeEventEmitter,
   Button,
+  Image,
+  StyleSheet,
 } from 'react-native';
 import DevMenu from './DevMenu';
 
@@ -54,7 +56,7 @@ export default class App extends Component {
   onComposeMessage = () => {
     MessagesManager.composeMessage({
       layout: {
-        imageName: 'zebra.jpg',
+        imageName: '000.jpg',
         imageTitle: 'Image Title',
         imageSubtitle: 'Image Subtitle',
       },
@@ -75,13 +77,44 @@ export default class App extends Component {
     MessagesManager.showLoadingView();
     this.performFakeAsyncTaskAndHideLoadingView();
   }
+  
 
   render() {
     const { message } = this.state;
 
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: "red",
+        padding: 20,
+      },
+      textInputView: {
+        padding: 8,
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+      },
+      textInput: {
+        flexGrow: 1,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: "#CCC",
+        padding: 10,
+        fontSize: 16,
+        marginRight: 10,
+        textAlignVertical: "top",
+      },
+      textInputButton: {
+        flexShrink: 1,
+      },
+    });
+
     return (
-      <View>
+      <View style={styles.container}>
         {__DEV__ && <DevMenu />}
+        <Text>TESTING CUSTOM</Text>
+        <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
+       style={{width: 40, height: 40}} />
 
         <Button
           title="Toggle the Presentation Style"
@@ -126,3 +159,5 @@ export default class App extends Component {
     );
   }
 }
+
+
