@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "react": "^16.8.6",
-    "react-native": "^0.59.4"
+    "react-native": "^0.59.4",
+    "react-native-emoji-board": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",

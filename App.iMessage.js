@@ -8,6 +8,7 @@ import {
   View,
   NativeModules,
   NativeEventEmitter,
+  TouchableOpacity,
   Button,
   Image,
   StyleSheet,
@@ -56,7 +57,7 @@ export default class App extends Component {
   onComposeMessage = () => {
     MessagesManager.composeMessage({
       layout: {
-        imageName: '000.jpg',
+        imageName: 'zebra.jpg',
         imageTitle: 'Image Title',
         imageSubtitle: 'Image Subtitle',
       },
@@ -65,6 +66,26 @@ export default class App extends Component {
     })
     .then(() => MessagesManager.updatePresentationStyle('compact'))
     .catch(error => console.log('An error occurred while composing the message: ', error))
+  }
+
+  getToolbarButtons() {
+    return [
+      {
+        text: 'show1',
+        testID: 'show1',
+        onPress: () => this.showKeyboardView('KeyboardView', 'FIRST - 1 (passed prop)'),
+      },
+      {
+        text: 'show2',
+        testID: 'show2',
+        onPress: () => this.showKeyboardView('AnotherKeyboardView', 'SECOND - 2 (passed prop)'),
+      },
+      {
+        text: 'reset',
+        testID: 'reset',
+        onPress: () => this.resetKeyboardView(),
+      },
+    ];
   }
 
   onOpenURL = () => {
@@ -112,6 +133,17 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         {__DEV__ && <DevMenu />}
+                  {
+            this.getToolbarButtons().map((button, index) =>
+              <TouchableOpacity
+                onPress={button.onPress}
+                style={{paddingLeft: 15, paddingBottom: 10}}
+                key={index}
+                testID={button.testID}
+              >
+                <Text>{button.text}</Text>
+              </TouchableOpacity>)
+          }
         <Text>TESTING CUSTOM</Text>
         <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 40, height: 40}} />
