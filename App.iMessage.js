@@ -15,8 +15,13 @@ import {
 } from 'react-native';
 import DevMenu from './DevMenu';
 
+import './demoKeyboards';
+import KeyboardInput from './demoMenu'
+
 const { MessagesManager, MessagesEventEmitter } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesEventEmitter);
+
+
 
 export default class App extends Component {
   state = {
@@ -133,17 +138,21 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         {__DEV__ && <DevMenu />}
-                  {
+        <View style={{flexDirection: 'row'}}>
+ 
+          {
             this.getToolbarButtons().map((button, index) =>
               <TouchableOpacity
                 onPress={button.onPress}
-                style={{paddingLeft: 15, paddingBottom: 10}}
+                style={{paddingLeft: 15, paddingBottom: 10, borderRadius:5}}
                 key={index}
                 testID={button.testID}
               >
                 <Text>{button.text}</Text>
               </TouchableOpacity>)
           }
+        </View>
+{/* <KeyboardInput/> */}
         <Text>TESTING CUSTOM</Text>
         <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 40, height: 40}} />
