@@ -12,11 +12,22 @@ import {
   Button,
   Image,
   StyleSheet,
+  ImagePropTypes,
+  TextInput,
+  InputAccessoryView
 } from 'react-native';
 import DevMenu from './DevMenu';
 
 import './demoKeyboards';
+import PropTypes from 'prop-types';
 import KeyboardInput from './demoMenu'
+
+import {KeyboardRegistry} from 'react-native-keyboard-input';
+import {KeyboardAccessoryView, KeyboardUtils} from 'react-native-keyboard-input';
+
+KeyboardRegistry.registerKeyboard('MyKeyboardView', () => KeyboardView);
+
+// KeyboardRegistry.onItemSelected(`MyKeyboardView`, params);
 
 const { MessagesManager, MessagesEventEmitter } = NativeModules;
 const MessagesEvents = new NativeEventEmitter(MessagesEventEmitter);
@@ -28,7 +39,16 @@ export default class App extends Component {
     presentationStyle: '',
     conversation: null,
     message: null,
+     text: 'Placeholder Text'
   }
+
+  static propTypes = {
+    title: PropTypes.string,
+  };
+
+  // static propTypes = {
+  //   title: this.propTypes.string,
+  // }
 
   componentDidMount() {
     MessagesManager
@@ -106,7 +126,9 @@ export default class App extends Component {
   
 
   render() {
+
     const { message } = this.state;
+    const inputAccessoryViewID = 'inputAccessoryView1';
 
     const styles = StyleSheet.create({
       container: {
@@ -138,6 +160,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         {__DEV__ && <DevMenu />}
+        
         <View style={{flexDirection: 'row'}}>
  
           {
@@ -151,8 +174,28 @@ export default class App extends Component {
                 <Text>{button.text}</Text>
               </TouchableOpacity>)
           }
+          
+        </View>
+        <View>
+        <TextInput
+          style={styles.default}
+          inputAccessoryViewID={inputAccessoryViewID}
+          onChangeText={(text) => this.setState({ text })}
+          value={this.state.text}
+        />
+        <InputAccessoryView nativeID={inputAccessoryViewID}>
+          <View style={{ backgroundColor: 'white' }}>
+            <Button
+              onPress={() =>
+                this.setState({ text: 'Placeholder Text' })
+              }
+              title="Reset Text"
+            />
+          </View>
+        </InputAccessoryView>
         </View>
 {/* <KeyboardInput/> */}
+
         <Text>TESTING CUSTOM</Text>
         <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 40, height: 40}} />

@@ -10,6 +10,7 @@
     "react": "^16.8.6",
     "react-native": "^0.59.4",
     "react-native-autogrow-textinput": "^5.4.0",
+    "react-native-emoji-board": "^1.2.1",
     "react-native-keyboard-input": "^6.0.2"
   },
   "devDependencies": {
