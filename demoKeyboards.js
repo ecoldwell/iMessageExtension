@@ -1,12 +1,35 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, TouchableOpacity, ScrollView, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  NativeModules,
+  NativeEventEmitter,
+  TouchableOpacity,
+  Button,
+  Image,
+  StyleSheet,
+  ImagePropTypes,
+  TextInput,
+  InputAccessoryView, 
+  ScrollView,
+  Platform,
+  PixelRatio,
+  Switch
+} from 'react-native';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 
 class KeyboardView extends Component {
   static propTypes = {
     title: PropTypes.string,
   };
+
+  state ={
+    presentationStyle: '',
+    conversation: null,
+    message: null,
+    text: 'Placeholder Text',
+  }
 
   onButtonPress() {
     KeyboardRegistry.onItemSelected('KeyboardView', {

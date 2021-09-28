@@ -8,7 +8,7 @@ import KeyboardRegistry from './KeyboardsRegistry';
 const IsAndroid = Platform.OS === 'android';
 const IsIOS = Platform.OS === 'ios';
 
-const CustomKeyboardViewNativeAndroid = requireNativeComponent('CustomKeyboardViewNative');
+// const CustomKeyboardViewNativeAndroid = requireNativeComponent('CustomKeyboardViewNative');
 
 export default class CustomKeyboardView extends Component {
   static propTypes = {
