@@ -24,13 +24,6 @@ class KeyboardView extends Component {
     title: PropTypes.string,
   };
 
-  state ={
-    presentationStyle: '',
-    conversation: null,
-    message: null,
-    text: 'Placeholder Text',
-  }
-
   onButtonPress() {
     KeyboardRegistry.onItemSelected('KeyboardView', {
       message: 'item selected from KeyboardView',

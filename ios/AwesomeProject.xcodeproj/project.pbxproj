@@ -57,10 +57,10 @@
 		ACDBA62122203E0400E0A30E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDBA62022203E0400E0A30E /* Assets.xcassets */; };
 		ACDBA62522203E0400E0A30E /* AwesomeProjectMessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ACDBA61722203E0300E0A30E /* AwesomeProjectMessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		E81DB8AF2703BB030040A4CF /* libKeyboardTrackingView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E84CA0AA270210A200B0035A /* libKeyboardTrackingView.a */; };
 		E84C9F9B26E905FC00B0035A /* main.jsbundle.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84C9F9A26E905FC00B0035A /* main.jsbundle.xib */; };
 		E84C9F9C26E905FC00B0035A /* main.jsbundle.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84C9F9A26E905FC00B0035A /* main.jsbundle.xib */; };
 		E84CA0AB270210D100B0035A /* libRCTCustomInputController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E84CA08C2702104100B0035A /* libRCTCustomInputController.a */; };
-		E84CA0AC270210FD00B0035A /* libKeyboardTrackingView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E84CA0AA270210A200B0035A /* libKeyboardTrackingView.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -444,6 +444,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81DB8AF2703BB030040A4CF /* libKeyboardTrackingView.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -453,7 +454,6 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
-				E84CA0AC270210FD00B0035A /* libKeyboardTrackingView.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				E84CA0AB270210D100B0035A /* libRCTCustomInputController.a in Frameworks */,
@@ -882,7 +882,7 @@
 					};
 					ACDBA61622203E0300E0A30E = {
 						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = A8EF3BLY4Z;
+						DevelopmentTeam = CPL6S7NU7V;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1737,7 +1737,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = A8EF3BLY4Z;
+				DEVELOPMENT_TEAM = CPL6S7NU7V;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = AwesomeProjectMessageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1774,7 +1774,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = A8EF3BLY4Z;
+				DEVELOPMENT_TEAM = CPL6S7NU7V;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = AwesomeProjectMessageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
