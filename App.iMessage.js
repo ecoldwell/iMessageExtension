@@ -18,7 +18,8 @@ import {
   ScrollView,
   Platform,
   PixelRatio,
-  Switch
+  Switch,
+  Keyboard
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
@@ -71,6 +72,7 @@ export default class App extends Component {
     conversation: null,
     message: null,
      text: 'Placeholder Text',
+     keyboardStatus: undefined,
      customKeyboard: {
       component: undefined,
       initialProps: undefined,
@@ -112,6 +114,31 @@ export default class App extends Component {
       .addListener('didSelectMessage', ({ message }) => this.setState({ message }));
 
     this.performFakeAsyncTaskAndHideLoadingView()
+
+    this.keyboardDidShowSubscription = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        this.setState({ keyboardStatus: 'Keyboard Shown' });
+      },
+    );
+    this.keyboardDidHideSubscription = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        this.setState({ keyboardStatus: 'Keyboard Hidden' });
+      },
+    );
+    // this.keyboardWillChangeFrame = Keyboard.addListener(
+    //   'keyboardWillChangeFrame',
+    //   () => {
+    //     this.setState({ keyboardStatus: 'Keyboard Change Frame' });
+    //   },
+    // );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowSubscription.remove();
+    this.keyboardDidHideSubscription.remove();
+    this.keyboardWillChangeFrame.remove();
   }
 
   performFakeAsyncTaskAndHideLoadingView = () => {
@@ -368,9 +395,16 @@ export default class App extends Component {
           }
           
         </View>
+        
         <View>
         <TextInput
-          style={styles.default}
+          placeholder='Click here…'
+          onSubmitEditing={Keyboard.dismiss}
+        />
+        <Text>
+          {this.state.keyboardStatus}
+        </Text>
+        <TextInput
           inputAccessoryViewID={inputAccessoryViewID}
           onChangeText={(text) => this.setState({ text })}
           value={this.state.text}
