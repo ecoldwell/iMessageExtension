@@ -14,7 +14,8 @@
     "react-native-emoji-board": "^1.2.1",
     "react-native-keyboard-accessory": "^0.1.15",
     "react-native-keyboard-input": "^6.0.2",
-    "react-native-keyboard-tracking-view": "^5.7.0"
+    "react-native-keyboard-tracking-view": "^5.7.0",
+    "react-native-ui-lib": "^6.0.0"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",

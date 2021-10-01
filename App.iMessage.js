@@ -27,11 +27,14 @@ import {KeyboardAccessoryView, KeyboardUtils} from 'react-native-keyboard-input'
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 import {_} from 'lodash';
 
+KeyboardRegistry.registerKeyboard('KeyboardView', () => KeyboardView);
+KeyboardRegistry.registerKeyboard('AnotherKeyboardView', () => AnotherKeyboardView);
+
 
 
 import DevMenu from './DevMenu';
 
-import './demoKeyboards';
+// import './demoKeyboards';
 import CustomKeyboardView from './src/CustomKeyboardView';
 
 const IsIOS = Platform.OS === 'ios';
@@ -81,7 +84,8 @@ export default class App extends Component {
     useSafeArea: true,
     keyboardOpenState: false,
 }
-  
+
+
 
 
   // static propTypes = {
@@ -165,6 +169,8 @@ export default class App extends Component {
     .catch(error => console.log('An error occurred while composing the message: ', error))
   }
 
+
+
   getToolbarButtons() {
     return [
       {
@@ -234,8 +240,19 @@ export default class App extends Component {
       return (<View />);
     }
     const {useSafeArea} = this.state;
+    const styles = StyleSheet.create({
+      safeAreaSwitchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      switch: {
+        marginLeft: 15,
+      },
+    });
+
     return (
-      <View style={styles.safeAreaSwitchContainer}>
+      <View tyle={styles.safeAreaSwitchContainer}>
         <Text>Safe Area Enabled:</Text>
         <Switch style={styles.switch} value={useSafeArea} onValueChange={this.toggleUseSafeArea}/>
       </View>
@@ -243,6 +260,47 @@ export default class App extends Component {
   }
 
   keyboardAccessoryViewContent() {
+    const COLOR = '#F5FCFF';
+    const styles = StyleSheet.create({
+      keyboardContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      keyboardContainer: {
+        ...Platform.select({
+          ios: {
+            flex: 1,
+            backgroundColor: COLOR,
+          },
+        }),
+      },
+      inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 25,
+      },
+      textInput: {
+        flex: 1,
+        marginLeft: 10,
+        marginTop: 10,
+        marginBottom: 10,
+        paddingLeft: 10,
+        paddingTop: 2,
+        paddingBottom: 5,
+        fontSize: 16,
+        backgroundColor: 'white',
+        borderWidth: 0.5 / PixelRatio.get(),
+        borderRadius: 18,
+      },
+      sendButton: {
+        paddingRight: 15,
+        paddingLeft: 15,
+        alignSelf: 'center',
+      },
+    });
     return (
       <View style={styles.keyboardContainer}>
         <View style={{borderTopWidth: StyleSheet.hairlineWidth, borderColor: '#bbb'}}/>
@@ -299,8 +357,21 @@ export default class App extends Component {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: "green",
+        backgroundColor: "#007DFF",
         padding: 20,
+        flexDirection: "column",
+      },
+      keyboardContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      contentContainer: {
+        flex:1,
+        // alignItems:'stretch',
+        // justifyContent: 'stretch',
+        flexDirection: 'column',  
       },
       textInputView: {
         padding: 8,
@@ -333,50 +404,32 @@ export default class App extends Component {
         paddingTop: 50,
         paddingBottom: 50,
       },
-      inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 25,
-      },
-      keyboardContainer: {
-        ...Platform.select({
-          ios: {
-            flex: 1,
-            backgroundColor: COLOR,
-          },
-        }),
-      },
-      textInput: {
-        flex: 1,
-        marginLeft: 10,
-        marginTop: 10,
-        marginBottom: 10,
-        paddingLeft: 10,
-        paddingTop: 2,
-        paddingBottom: 5,
-        fontSize: 16,
-        backgroundColor: 'white',
-        borderWidth: 0.5 / PixelRatio.get(),
-        borderRadius: 18,
-      },
-      sendButton: {
-        paddingRight: 15,
-        paddingLeft: 15,
-        alignSelf: 'center',
-      },
-      switch: {
-        marginLeft: 15,
-      },
-      safeAreaSwitchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    });
+});
+
 
     return (
-      <View style={styles.container}>
+  <View style={styles.container}>
+        <ScrollView
+          
+          keyboardDismissMode={TrackInteractive ? 'interactive' : 'none'}
+        >
+          { this.safeAreaSwitchToggle() }
+        </ScrollView>
+        
+        {/* <KeyboardAccessoryView
+          renderContent={this.keyboardAccessoryViewContent}
+          onHeightChanged={height => this.setState({keyboardAccessoryViewHeight: IsIOS ? height : undefined})}
+          trackInteractive={TrackInteractive}
+          kbInputRef={this.textInputRef}
+          kbComponent={this.state.customKeyboard.component}
+          kbInitialProps={this.state.customKeyboard.initialProps}
+          onItemSelected={this.onKeyboardItemSelected}
+          onKeyboardResigned={this.onKeyboardResigned}
+          revealKeyboardInteractive
+          useSafeArea={this.state.useSafeArea}
+        /> */}
+      <ScrollView KeyboardRegistry="KeyboardView">
+        <View>
         {__DEV__ && <DevMenu />}
 
         
@@ -420,8 +473,15 @@ export default class App extends Component {
           </View>
         </InputAccessoryView>
         </View>
+        <Button
+          title="Toggle the Presentation Style"
+          onPress={this.onTogglePresentationStyle}
+          disabled={!this.state.presentationStyle}
+        />
+        </View>
+        </ScrollView>
 {/* <KeyboardInput/> */}
-
+<ScrollView KeyboardRegistry="AnotherKeyboardView">
         <Text>TESTING CUSTOM</Text>
         <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 40, height: 40}} />
@@ -446,7 +506,8 @@ export default class App extends Component {
           title="Show Loading View (hides after 3 seconds)"
           onPress={this.onShowLoadingView}
         />
-
+        </ScrollView>
+<ScrollView>
         {message && message.url && (
           <View style={{
             marginTop: 25,
@@ -465,7 +526,10 @@ export default class App extends Component {
             </Text>
           </View>
         )}
+        </ScrollView>
+
       </View>
+      
     );
   }
 }
