@@ -74,7 +74,7 @@ export default class KeyboardAccessoryView extends Component {
   getIOSTrackingScrollBehavior() {
     let scrollBehavior = this.props.iOSScrollBehavior;
     if (IsIOS && NativeModules.KeyboardTrackingViewManager && scrollBehavior === -1) {
-      scrollBehavior = NativeModules.KeyboardTrackingViewManager.KeyboardTrackingScrollBehaviorFixedOffset;
+      // scrollBehavior = NativeModules.KeyboardTrackingViewManager.KeyboardTrackingScrollBehaviorFixedOffset;
     }
     return scrollBehavior;
   }
